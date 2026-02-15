@@ -1,4 +1,4 @@
-name: Run thepopebot Job
+name: Run jarvisbot Job
 
 on:
   create:
@@ -20,7 +20,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run thepopebot Agent
+      - name: Run jarvisbot Agent
         env:
           IMAGE_URL: ${{ vars.IMAGE_URL }}
           MODEL: ${{ vars.MODEL }}

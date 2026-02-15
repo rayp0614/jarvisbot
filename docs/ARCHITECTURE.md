@@ -1,6 +1,6 @@
 # Architecture
 
-thepopebot uses a two-layer architecture:
+jarvisbot uses a two-layer architecture:
 
 1. **Event Handler** - Node.js server for webhooks, Telegram chat, and cron scheduling
 2. **Docker Agent** - Pi coding agent container for autonomous task execution

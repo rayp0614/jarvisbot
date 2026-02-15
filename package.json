@@ -1,5 +1,5 @@
 {
-  "name": "thepopebot",
+  "name": "jarvisbot",
   "version": "1.0.0",
   "description": "An autonomous AI agent infrastructure using Claude Code in Docker containers.",
   "main": "index.js",

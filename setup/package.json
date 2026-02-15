@@ -1,8 +1,8 @@
 {
-  "name": "thepopebot-setup",
+  "name": "jarvisbot-setup",
   "version": "1.0.0",
   "type": "module",
-  "description": "Interactive setup wizard for thepopebot",
+  "description": "Interactive setup wizard for jarvisbot",
   "main": "setup.mjs",
   "scripts": {
     "setup": "node setup.mjs"

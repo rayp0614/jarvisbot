@@ -1,16 +1,16 @@
-# thepopebot
+# jarvisbot
 
 **Autonomous AI agents. All the power. None of the leaked API keys.**
 
 ---
 
-## Why thepopebot?
+## Why jarvisbot?
 
-**Secure by default** — Other frameworks hand credentials to the LLM and hope for the best. thepopebot is different: the AI literally cannot access your secrets, even if it tries. Secrets are filtered at the process level before the agent's shell even starts.
+**Secure by default** — Other frameworks hand credentials to the LLM and hope for the best. jarvisbot is different: the AI literally cannot access your secrets, even if it tries. Secrets are filtered at the process level before the agent's shell even starts.
 
 **The repository IS the agent** — Every action your agent takes is a git commit. You can see exactly what it did, when, and why. If it screws up, revert it. Want to clone your agent? Fork the repo — code, personality, scheduled jobs, full history, all of it goes with your fork.
 
-**Free compute, built in** — Every GitHub account comes with free cloud computing time. thepopebot uses that to run your agent. One task or a hundred in parallel — the compute is already included.
+**Free compute, built in** — Every GitHub account comes with free cloud computing time. jarvisbot uses that to run your agent. One task or a hundred in parallel — the compute is already included.
 
 **Self-evolving** — The agent modifies its own code through pull requests. Every change is auditable, every change is reversible. You stay in control.
 
@@ -57,7 +57,7 @@ You talk to your bot on Telegram (or hit a webhook). The Event Handler creates a
 
 ## Get FREE server time on Github!
 
-| | thepopebot | Other platforms |
+| | jarvisbot | Other platforms |
 |---|---|---|
 | **Public repos** | Free. $0. GitHub Actions doesn't charge. | $20-100+/month |
 | **Private repos** | 2,000 free minutes/month (every GitHub plan, including free) | $20-100+/month |

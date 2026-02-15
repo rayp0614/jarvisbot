@@ -1,16 +1,16 @@
-# thepopebot - AI Agent Template
+# jarvisbot - AI Agent Template
 
-This document explains the thepopebot codebase for AI assistants working on this project.
+This document explains the jarvisbot codebase for AI assistants working on this project.
 
-## What is thepopebot?
+## What is jarvisbot?
 
-thepopebot is a **template repository** for creating custom autonomous AI agents. It features a two-layer architecture: an Event Handler for orchestration (webhooks, Telegram chat, cron scheduling) and a Docker Agent for autonomous task execution via the Pi coding agent.
+jarvisbot is a **template repository** for creating custom autonomous AI agents. It features a two-layer architecture: an Event Handler for orchestration (webhooks, Telegram chat, cron scheduling) and a Docker Agent for autonomous task execution via the Pi coding agent.
 
 ## Two-Layer Architecture
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│                          thepopebot Architecture                          │
+│                          jarvisbot Architecture                          │
 ├──────────────────────────────────────────────────────────────────────────┤
 │                                                                          │
 │   ┌──────────────────┐                                                   │
@@ -328,7 +328,7 @@ The Dockerfile creates a container with:
 6. Clone repository branch to `/job`
 7. Run Pi with SOUL.md + job.md as prompt
 8. Save session log to `logs/{JOB_ID}/`
-9. Commit all changes with message `thepopebot: job {JOB_ID}`
+9. Commit all changes with message `jarvisbot: job {JOB_ID}`
 10. Create PR via `gh pr create` (auto-merge handled by `auto-merge.yml` workflow)
 
 ### Environment Variables (Docker Agent)
