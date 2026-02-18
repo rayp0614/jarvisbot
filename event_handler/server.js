@@ -43,6 +43,12 @@ const { API_KEY, TELEGRAM_WEBHOOK_SECRET, TELEGRAM_BOT_TOKEN, GH_WEBHOOK_SECRET,
 // Bot token from env, can be overridden by /telegram/register
 let telegramBotToken = TELEGRAM_BOT_TOKEN || null;
 
+// Serve React dashboard FIRST (before auth middleware)
+const webDistPath = path.join(__dirname, 'web', 'dist');
+if (fs.existsSync(webDistPath)) {
+  app.use(express.static(webDistPath));
+}
+
 // Routes that have their own authentication
 const PUBLIC_ROUTES = ['/telegram/webhook', '/github/webhook', '/api/auth/login'];
 
@@ -325,12 +331,8 @@ app.post('/github/webhook', async (req, res) => {
   }
 });
 
-// Serve React dashboard (production build)
-const webDistPath = path.join(__dirname, 'web', 'dist');
+// SPA fallback - serve index.html for all non-API routes (static files served at top)
 if (fs.existsSync(webDistPath)) {
-  app.use(express.static(webDistPath));
-
-  // SPA fallback - serve index.html for all non-API routes
   app.get('*', (req, res, next) => {
     // Don't intercept API routes or existing endpoints
     if (req.path.startsWith('/api/') ||
