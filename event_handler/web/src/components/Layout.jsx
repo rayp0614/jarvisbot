@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Clock, Zap, Briefcase, LogOut } from 'lucide-react';
+import { Home, Clock, Zap, Briefcase, DollarSign, LogOut } from 'lucide-react';
 import clsx from 'clsx';
 
 const navItems = [
@@ -7,6 +7,7 @@ const navItems = [
   { to: '/crons', icon: Clock, label: 'Cron Jobs' },
   { to: '/triggers', icon: Zap, label: 'Triggers' },
   { to: '/jobs', icon: Briefcase, label: 'Jobs' },
+  { to: '/sales', icon: DollarSign, label: 'Sales' },
 ];
 
 function Layout({ children, onLogout }) {

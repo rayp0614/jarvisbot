@@ -50,5 +50,12 @@
     "type": "agent",
     "job": "Read the file at operating_system/FINANCIAL_ADVISOR/FINANCIAL_ADVISOR.md and complete the tasks described there.",
     "enabled": true
+  },
+  {
+    "name": "daily-sales-summary",
+    "schedule": "0 8 * * 1-5",
+    "type": "command",
+    "command": "node cron/daily-sales-summary.js",
+    "enabled": false
   }
 ]

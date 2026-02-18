@@ -22,6 +22,7 @@ const { setupDashboardRoutes } = require('./api/dashboard');
 const { setupCronsRoutes } = require('./api/crons');
 const { setupTriggersRoutes } = require('./api/triggers');
 const { setupJobsRoutes } = require('./api/jobs');
+const { setupSalesRoutes } = require('./api/sales');
 
 // Database (lazy load to handle missing better-sqlite3 gracefully)
 let db = null;
@@ -74,6 +75,7 @@ if (db) {
   setupCronsRoutes(app, authMiddleware, db);
   setupTriggersRoutes(app, authMiddleware, db);
   setupJobsRoutes(app, authMiddleware, db);
+  setupSalesRoutes(app, authMiddleware);
 }
 
 app.use(loadTriggers());

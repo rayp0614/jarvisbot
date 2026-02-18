@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Crons from './pages/Crons';
 import Triggers from './pages/Triggers';
 import Jobs from './pages/Jobs';
+import Sales from './pages/Sales';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -63,6 +64,7 @@ function App() {
         <Route path="/crons" element={<Crons />} />
         <Route path="/triggers" element={<Triggers />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/sales" element={<Sales />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
