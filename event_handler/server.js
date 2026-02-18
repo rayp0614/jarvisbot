@@ -53,7 +53,7 @@ if (fs.existsSync(webDistPath)) {
 // Routes that have their own authentication
 const PUBLIC_ROUTES = ['/telegram/webhook', '/github/webhook', '/api/auth/login'];
 
-// Global x-api-key auth (skip for routes with their own auth and /api/* routes)
+// Global x-api-key auth (skip for routes with their own auth, /api/*, and frontend routes)
 app.use((req, res, next) => {
   if (PUBLIC_ROUTES.includes(req.path)) {
     return next();
@@ -61,6 +61,15 @@ app.use((req, res, next) => {
   // Dashboard API routes use JWT auth, not x-api-key
   if (req.path.startsWith('/api/')) {
     return next();
+  }
+  // Skip auth for frontend SPA routes (served by React)
+  const isBackendRoute = req.path.startsWith('/telegram/') ||
+                         req.path.startsWith('/github/') ||
+                         req.path.startsWith('/jobs/') ||
+                         req.path === '/webhook' ||
+                         req.path === '/ping';
+  if (!isBackendRoute) {
+    return next(); // Let SPA fallback handle it
   }
   if (req.headers['x-api-key'] !== API_KEY) {
     return res.status(401).json({ error: 'Unauthorized' });
