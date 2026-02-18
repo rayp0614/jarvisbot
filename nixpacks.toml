@@ -1,0 +1,9 @@
+# Force Nixpacks to build the event_handler, not the Dockerfile
+[phases.setup]
+nixPkgs = ["nodejs_22", "python311"]
+
+[phases.install]
+cmds = ["cd event_handler && npm install", "cd event_handler/web && npm install && npm run build"]
+
+[start]
+cmd = "cd event_handler && node server.js"
