@@ -16,9 +16,26 @@ const { githubApi, getJobStatus } = require('./tools/github');
 const { getApiKey } = require('./claude');
 const { render_md } = require('./utils/render-md');
 
+// Dashboard API routes
+const { setupAuthRoutes, authMiddleware } = require('./api/auth');
+const { setupDashboardRoutes } = require('./api/dashboard');
+const { setupCronsRoutes } = require('./api/crons');
+const { setupTriggersRoutes } = require('./api/triggers');
+const { setupJobsRoutes } = require('./api/jobs');
+
+// Database (lazy load to handle missing better-sqlite3 gracefully)
+let db = null;
+try {
+  db = require('./db');
+} catch (err) {
+  console.warn('SQLite not available - dashboard features disabled. Run: npm install better-sqlite3');
+}
+
 const app = express();
 
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false, // Allow inline scripts for React
+}));
 app.use(express.json());
 
 const { API_KEY, TELEGRAM_WEBHOOK_SECRET, TELEGRAM_BOT_TOKEN, GH_WEBHOOK_SECRET, GH_OWNER, GH_REPO, TELEGRAM_CHAT_ID, TELEGRAM_VERIFICATION } = process.env;
@@ -27,11 +44,15 @@ const { API_KEY, TELEGRAM_WEBHOOK_SECRET, TELEGRAM_BOT_TOKEN, GH_WEBHOOK_SECRET,
 let telegramBotToken = TELEGRAM_BOT_TOKEN || null;
 
 // Routes that have their own authentication
-const PUBLIC_ROUTES = ['/telegram/webhook', '/github/webhook'];
+const PUBLIC_ROUTES = ['/telegram/webhook', '/github/webhook', '/api/auth/login'];
 
-// Global x-api-key auth (skip for routes with their own auth)
+// Global x-api-key auth (skip for routes with their own auth and /api/* routes)
 app.use((req, res, next) => {
   if (PUBLIC_ROUTES.includes(req.path)) {
+    return next();
+  }
+  // Dashboard API routes use JWT auth, not x-api-key
+  if (req.path.startsWith('/api/')) {
     return next();
   }
   if (req.headers['x-api-key'] !== API_KEY) {
@@ -39,6 +60,15 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// Setup dashboard API routes (if database is available)
+if (db) {
+  setupAuthRoutes(app);
+  setupDashboardRoutes(app, authMiddleware, db);
+  setupCronsRoutes(app, authMiddleware, db);
+  setupTriggersRoutes(app, authMiddleware, db);
+  setupJobsRoutes(app, authMiddleware, db);
+}
 
 app.use(loadTriggers());
 
@@ -294,6 +324,26 @@ app.post('/github/webhook', async (req, res) => {
     res.status(500).json({ error: 'Failed to process webhook' });
   }
 });
+
+// Serve React dashboard (production build)
+const webDistPath = path.join(__dirname, 'web', 'dist');
+if (fs.existsSync(webDistPath)) {
+  app.use(express.static(webDistPath));
+
+  // SPA fallback - serve index.html for all non-API routes
+  app.get('*', (req, res, next) => {
+    // Don't intercept API routes or existing endpoints
+    if (req.path.startsWith('/api/') ||
+        req.path.startsWith('/telegram/') ||
+        req.path.startsWith('/github/') ||
+        req.path === '/webhook' ||
+        req.path === '/ping' ||
+        req.path.startsWith('/jobs/')) {
+      return next();
+    }
+    res.sendFile(path.join(webDistPath, 'index.html'));
+  });
+}
 
 // Error handler - don't leak stack traces
 app.use((err, req, res, next) => {
