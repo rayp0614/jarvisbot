@@ -1,0 +1,76 @@
+{
+  "analysis_date": "2026-02-20",
+  "search_area": "20 miles around zip 06002",
+  "priority_ranking": [
+    {
+      "rank": 1,
+      "business": "Keno Electrical Systems LLC",
+      "category": "Electrician",
+      "phone": "+1 860-936-2043",
+      "rating": 4.9,
+      "reviews": 76,
+      "conversion_score": 9.5,
+      "reasoning": "Highest rating (4.9★) with strong review volume (76). Electricians are high-intent searchers - people need them NOW. Premium service quality (4.9) suggests high-value clients who appreciate investment in business growth. Perfect candidate.",
+      "why_need_website": "Emergency electrical work is 70% searched on mobile. Without a website, you're invisible to homeowners Googling 'electrician near me' at 9pm when a breaker trips. Your 4.9 stars should be working 24/7 - not hidden.",
+      "outreach_approach": "phone",
+      "best_contact_time": "Tuesday-Thursday, 8:30-10:00 AM (after morning dispatch, before field work intensifies)",
+      "red_flags": "None - ideal prospect"
+    },
+    {
+      "rank": 2,
+      "business": "J.M. Curtis Energy Solutions",
+      "category": "HVAC contractor",
+      "phone": "+1 860-264-5118",
+      "rating": 4.9,
+      "reviews": 68,
+      "conversion_score": 9.2,
+      "reasoning": "Tied for highest rating (4.9★), solid review base (68). HVAC is highly seasonal and competitive - spring/summer AC repairs are high-value. 'Energy Solutions' suggests modern, efficiency-focused positioning that needs digital presence.",
+      "why_need_website": "HVAC customers compare multiple quotes online before calling. Peak season is coming (spring AC check-ups). Right now, every competitor with a website is getting leads you're missing. Your 4.9 rating needs to be on Google's first page.",
+      "outreach_approach": "phone",
+      "best_contact_time": "Monday-Wednesday, 4:00-5:30 PM (after service calls, before evening estimates)",
+      "red_flags": "None - timing is perfect with spring approaching"
+    },
+    {
+      "rank": 3,
+      "business": "Anytime Sewer & Drain Services",
+      "category": "Plumber",
+      "phone": "+1 860-286-0331",
+      "rating": 4.8,
+      "reviews": 92,
+      "conversion_score": 9.0,
+      "reasoning": "Highest review count (92) = most established. 'Anytime' branding implies 24/7 emergency service - CRITICAL need for online visibility. Strong 4.8★ rating. Emergency plumbing is pure mobile search behavior.",
+      "why_need_website": "Your name literally says 'Anytime' but you're invisible when customers search at 2am with a flooded basement. Emergency plumbing searches are 85% mobile. You're losing high-value emergency calls to competitors with websites every single day.",
+      "outreach_approach": "email",
+      "best_contact_time": "Early morning (6:00-7:00 AM) - catch them before emergency calls start",
+      "red_flags": "May be very busy (high review volume) - emphasize ROI and passive lead generation"
+    },
+    {
+      "rank": 4,
+      "business": "Venora Electric Inc",
+      "category": "Electrician",
+      "phone": "+1 860-242-8081",
+      "rating": 4.7,
+      "reviews": 58,
+      "conversion_score": 8.0,
+      "reasoning": "Solid 4.7★ rating with good review volume (58). Established business. Good prospect but slightly behind other electrician (Keno) in ratings and reviews. Still strong conversion potential.",
+      "why_need_website": "You're competing with electricians who show up first on Google. 58 great reviews are worthless if customers can't find them. A website turns your reputation into 24/7 marketing that books appointments while you sleep.",
+      "outreach_approach": "phone",
+      "best_contact_time": "Tuesday/Thursday, 2:00-3:30 PM (afternoon lull between jobs)",
+      "red_flags": "Slightly lower rating than competitor Keno - may need to emphasize differentiation"
+    },
+    {
+      "rank": 5,
+      "business": "John's Plumbing & Heating LLC",
+      "category": "Contractor",
+      "phone": "+1 860-242-4909",
+      "rating": 4.3,
+      "reviews": 41,
+      "conversion_score": 7.5,
+      "reasoning": "Lowest rating (4.3★) and smallest review base (41) of the group. Still decent but may face objections. Dual service (plumbing + heating) offers opportunity for seasonal marketing angles.",
+      "why_need_website": "Plumbing and heating customers research before calling. Your 4.3 rating isn't bad, but without a website to tell your story and showcase your work, you're just a number. Let's turn those 41 reviews into a powerful first impression.",
+      "outreach_approach": "email",
+      "best_contact_time": "Wednesday/Thursday, 11:00 AM-12:30 PM (before lunch)",
+      "red_flags": "Lower rating may indicate service/follow-up issues - may be harder to close or have higher churn risk"
+    }
+  ]
+}
