@@ -1,9 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { Home, Clock, Zap, Briefcase, DollarSign, LogOut } from 'lucide-react';
+import { Home, Clock, Zap, Briefcase, DollarSign, LogOut, Search } from 'lucide-react';
 import clsx from 'clsx';
 
 const navItems = [
   { to: '/', icon: Home, label: 'Dashboard' },
+  { to: '/lead-finder', icon: Search, label: 'Lead Finder' },
   { to: '/crons', icon: Clock, label: 'Cron Jobs' },
   { to: '/triggers', icon: Zap, label: 'Triggers' },
   { to: '/jobs', icon: Briefcase, label: 'Jobs' },

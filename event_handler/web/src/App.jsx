@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import LeadFinder from './pages/LeadFinder';
 import Crons from './pages/Crons';
 import Triggers from './pages/Triggers';
 import Jobs from './pages/Jobs';
@@ -61,6 +62,7 @@ function App() {
     <Layout onLogout={handleLogout}>
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/lead-finder" element={<LeadFinder />} />
         <Route path="/crons" element={<Crons />} />
         <Route path="/triggers" element={<Triggers />} />
         <Route path="/jobs" element={<Jobs />} />
