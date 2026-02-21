@@ -63,6 +63,7 @@ async function triggerLeadSearch(params) {
 
 /**
  * Get the status of a Trigger.dev run
+ * Note: Run status uses v3 API, while triggering uses v1 API
  */
 async function getRunStatus(runId) {
   const secretKey = process.env.TRIGGER_SECRET_KEY;
@@ -70,7 +71,8 @@ async function getRunStatus(runId) {
     throw new Error('TRIGGER_SECRET_KEY not configured');
   }
 
-  const response = await fetch(`${TRIGGER_API_URL}/runs/${runId}`, {
+  // Run status endpoint is v3, not v1!
+  const response = await fetch(`https://api.trigger.dev/api/v3/runs/${runId}`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${secretKey}`,
