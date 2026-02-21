@@ -1,18 +1,22 @@
-🎯 **3 HOT LEADS - CALL TODAY**
+🎯 **LEAD ANALYSIS: 3 Prospects Ready**
 
-🥇 **Joe the Plumber** (9/10)
-536 reviews, NO site. Losing $2-4K/month.
-📞 860-614-7157
+**TOP 3 PICKS FOR TODAY:**
 
-🥈 **Anytime Sewer & Drain** (8/10)  
-4.8★ rating. "Anytime" needs 24/7 web presence.
+🥇 **Anytime Sewer & Drain** (9/10)
 📞 860-286-0331
+Emergency service, 4.8★ (92 reviews), NO website
+💡 Losing 24/7 leads to competitors
+
+🥈 **Venora Electric Inc** (8/10)  
+📞 860-242-8081
+Trust-based service, 4.7★ (58 reviews), NO website
+💡 Credentials & portfolio need showcase
 
 🥉 **John's Plumbing & Heating** (7/10)
-Dual services, needs year-round leads.
 📞 860-242-4909
+Dual services, 4.3★ (41 reviews), NO website
+💡 Cross-sell opportunity (plumbing ↔️ heating)
 
-⏰ Best time: 7:30-10 AM today
-💰 Total potential: $8K-12K revenue
+**Expected conversion: 1-2 closes**
 
-Full analysis in your email! 🚀
+📧 Full analysis + scripts sent to email
