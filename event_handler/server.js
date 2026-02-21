@@ -274,19 +274,56 @@ async function emailLeadAnalysisIfPresent(jobId, changedFiles) {
     // Decode base64 content
     const emailContent = Buffer.from(response.content, 'base64').toString('utf-8');
 
-    // Convert markdown to simple HTML
-    const htmlContent = convertMarkdownToHtml(emailContent);
+    // Parse the email file format:
+    // TO: email@example.com
+    // SUBJECT: Subject line
+    // FORMAT: html
+    //
+    // <html>...</html>
+    const lines = emailContent.split('\n');
+    let to = null;
+    let subject = null;
+    let format = 'html';
+    let bodyStartIndex = 0;
 
-    // Send the email
-    const recipientEmail = process.env.LEAD_RECIPIENT_EMAIL || process.env.EMAIL_DEFAULT_TO;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('TO:')) {
+        to = line.slice(3).trim();
+      } else if (line.startsWith('SUBJECT:')) {
+        subject = line.slice(8).trim();
+      } else if (line.startsWith('FORMAT:')) {
+        format = line.slice(7).trim().toLowerCase();
+      } else if (line === '' || line.startsWith('<')) {
+        // Empty line or HTML start marks the beginning of body
+        bodyStartIndex = i;
+        break;
+      }
+    }
+
+    // Get the body content (everything after headers)
+    let body = lines.slice(bodyStartIndex).join('\n').trim();
+
+    // If format is HTML and body already contains HTML, use it directly
+    // Otherwise convert markdown to HTML
+    const isHtml = format === 'html' || body.includes('<html') || body.includes('<HTML');
+    const htmlContent = isHtml ? body : convertMarkdownToHtml(body);
+
+    // Use parsed TO or fallback to env var
+    const recipientEmail = to || process.env.LEAD_RECIPIENT_EMAIL || process.env.EMAIL_DEFAULT_TO;
     if (!recipientEmail) {
       console.log('No recipient email configured');
       return;
     }
 
+    // Use parsed subject or default
+    const emailSubject = subject || `🎯 Lead Analysis Report - ${new Date().toLocaleDateString()}`;
+
+    console.log(`Sending email to: ${recipientEmail}, subject: ${emailSubject}`);
+
     const result = await sendEmail({
       to: recipientEmail,
-      subject: `🎯 Lead Analysis Report - ${new Date().toLocaleDateString()}`,
+      subject: emailSubject,
       body: htmlContent,
       isHtml: true,
     });
