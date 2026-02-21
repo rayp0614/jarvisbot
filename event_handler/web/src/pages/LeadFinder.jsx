@@ -85,7 +85,16 @@ function LeadFinder() {
     queryKey: ['lead-finder-status', lastRun?.runId],
     queryFn: () => apiFetch(`/api/lead-finder/status/${lastRun?.runId}`),
     enabled: !!lastRun?.runId,
-    refetchInterval: lastRun?.runId ? 5000 : false, // Poll every 5s while running
+    // Poll every 5s while running, stop when completed or failed
+    refetchInterval: (query) => {
+      const status = query.state.data?.status;
+      // Stop polling when job is done
+      if (status === 'COMPLETED' || status === 'FAILED' || status === 'CANCELED') {
+        return false;
+      }
+      // Keep polling for running/queued states
+      return 5000;
+    },
   });
 
   // Mutation to trigger lead search
@@ -133,7 +142,9 @@ function LeadFinder() {
     }));
   };
 
-  const isRunning = searchMutation.isPending || (jobStatus?.status === 'EXECUTING');
+  // Consider running if mutation is pending OR job is queued/executing
+  const isRunning = searchMutation.isPending ||
+    ['QUEUED', 'EXECUTING', 'REATTEMPTING', 'FROZEN'].includes(jobStatus?.status);
 
   return (
     <div>
@@ -422,13 +433,13 @@ function LeadFinder() {
                 {/* Run Status */}
                 <div className={`p-4 rounded-lg ${
                   jobStatus?.status === 'COMPLETED' ? 'bg-green-50' :
-                  jobStatus?.status === 'FAILED' ? 'bg-red-50' :
+                  jobStatus?.status === 'FAILED' || jobStatus?.status === 'CANCELED' ? 'bg-red-50' :
                   'bg-blue-50'
                 }`}>
                   <div className="flex items-center gap-2">
                     {jobStatus?.status === 'COMPLETED' ? (
                       <CheckCircle size={20} className="text-green-600" />
-                    ) : jobStatus?.status === 'FAILED' ? (
+                    ) : jobStatus?.status === 'FAILED' || jobStatus?.status === 'CANCELED' ? (
                       <AlertCircle size={20} className="text-red-600" />
                     ) : (
                       <Loader2 size={20} className="text-blue-600 animate-spin" />
@@ -436,7 +447,11 @@ function LeadFinder() {
                     <span className="font-medium">
                       {jobStatus?.status === 'COMPLETED' ? 'Search Complete' :
                        jobStatus?.status === 'FAILED' ? 'Search Failed' :
-                       'Searching...'}
+                       jobStatus?.status === 'CANCELED' ? 'Search Canceled' :
+                       jobStatus?.status === 'QUEUED' ? 'Queued...' :
+                       jobStatus?.status === 'EXECUTING' ? 'Searching...' :
+                       jobStatus?.status ? `Status: ${jobStatus.status}` :
+                       'Starting...'}
                     </span>
                   </div>
                 </div>
