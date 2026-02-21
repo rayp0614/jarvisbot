@@ -1,41 +1,12 @@
 /**
- * Email integration using Gmail SMTP
+ * Email integration using Resend API
+ * (More reliable on cloud platforms than SMTP)
  */
-const nodemailer = require('nodemailer');
 
-const {
-  GMAIL_USER,
-  GMAIL_APP_PASSWORD,
-  EMAIL_DEFAULT_TO,
-} = process.env;
+const { RESEND_API_KEY, EMAIL_DEFAULT_TO } = process.env;
 
 /**
- * Create Gmail transporter with explicit SMTP settings
- * (More reliable on cloud platforms like Railway)
- */
-function getTransporter() {
-  if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
-    throw new Error('Gmail credentials not configured');
-  }
-
-  return nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // Use STARTTLS
-    auth: {
-      user: GMAIL_USER,
-      pass: GMAIL_APP_PASSWORD,
-    },
-    connectionTimeout: 30000, // 30 seconds
-    greetingTimeout: 30000,
-    socketTimeout: 60000, // 60 seconds for large emails
-    pool: false, // Disable pooling for serverless environments
-    family: 4, // Force IPv4 (Railway has IPv6 connectivity issues with Gmail)
-  });
-}
-
-/**
- * Send an email
+ * Send an email using Resend API
  * @param {Object} options - Email options
  * @param {string} options.to - Recipient email (defaults to EMAIL_DEFAULT_TO)
  * @param {string} options.subject - Email subject
@@ -49,20 +20,40 @@ async function sendEmail({
   body,
   isHtml = false,
 }) {
-  const transporter = getTransporter();
-
-  const mailOptions = {
-    from: `JarvisBot <${GMAIL_USER}>`,
-    to,
-    subject,
-    [isHtml ? 'html' : 'text']: body,
-  };
+  if (!RESEND_API_KEY) {
+    console.error('RESEND_API_KEY not configured');
+    return { success: false, error: 'RESEND_API_KEY not configured' };
+  }
 
   try {
-    const info = await transporter.sendMail(mailOptions);
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'JarvisBot <onboarding@resend.dev>',
+        to: [to],
+        subject,
+        [isHtml ? 'html' : 'text']: body,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Resend API error:', data);
+      return {
+        success: false,
+        error: data.message || 'Failed to send email',
+      };
+    }
+
+    console.log('Email sent successfully:', data.id);
     return {
       success: true,
-      messageId: info.messageId,
+      messageId: data.id,
       to,
       subject,
     };
@@ -79,7 +70,7 @@ async function sendEmail({
  * Check if email is enabled
  */
 function isEmailEnabled() {
-  return !!(GMAIL_USER && GMAIL_APP_PASSWORD);
+  return !!RESEND_API_KEY;
 }
 
 module.exports = {
