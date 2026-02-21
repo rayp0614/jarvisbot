@@ -248,23 +248,26 @@ async function emailLeadAnalysisIfPresent(jobId, changedFiles) {
     return;
   }
 
-  // Check if this job created lead analysis files
-  const analysisFile = changedFiles?.find(f => f.includes('LEAD_ANALYSIS.md') || f.includes('EMAIL_TO_SEND.md'));
-  if (!analysisFile) {
+  // Find the EMAIL_TO_SEND.md file in the changed files list
+  // AI may create it in logs/{jobId}/ or logs/lead_analysis_YYYYMMDD_HHMMSS/ or elsewhere
+  const emailFile = changedFiles?.find(f => f.endsWith('EMAIL_TO_SEND.md'));
+  if (!emailFile) {
+    console.log('No EMAIL_TO_SEND.md in changed files for job', jobId);
     return; // Not a lead analysis job
   }
 
-  try {
-    // Fetch the email content from GitHub
-    const { GH_OWNER, GH_REPO } = process.env;
-    const emailPath = `logs/${jobId}/EMAIL_TO_SEND.md`;
+  console.log(`Found email file: ${emailFile}`);
 
-    const response = await githubApi(`/repos/${GH_OWNER}/${GH_REPO}/contents/${emailPath}`, {
+  try {
+    // Fetch the email content from GitHub using the actual path from changed files
+    const { GH_OWNER, GH_REPO } = process.env;
+
+    const response = await githubApi(`/repos/${GH_OWNER}/${GH_REPO}/contents/${emailFile}`, {
       method: 'GET',
     });
 
     if (!response.content) {
-      console.log('No EMAIL_TO_SEND.md found for job', jobId);
+      console.log('No EMAIL_TO_SEND.md content found at', emailFile);
       return;
     }
 
@@ -451,6 +454,69 @@ app.post('/github/webhook', async (req, res) => {
   } catch (err) {
     console.error('Failed to process GitHub webhook:', err);
     res.status(500).json({ error: 'Failed to process webhook' });
+  }
+});
+
+// POST /api/email-job/:jobId - manually trigger email for a job
+app.post('/api/email-job/:jobId', authMiddleware, async (req, res) => {
+  const { jobId } = req.params;
+  if (!jobId) {
+    return res.status(400).json({ error: 'Job ID required' });
+  }
+
+  console.log(`Manual email trigger for job ${jobId}`);
+
+  try {
+    // Search for EMAIL_TO_SEND.md in the job's log directory or any subdirectory
+    const { GH_OWNER, GH_REPO } = process.env;
+
+    // Try direct path first: logs/{jobId}/EMAIL_TO_SEND.md
+    let emailPath = `logs/${jobId}/EMAIL_TO_SEND.md`;
+    let found = false;
+
+    try {
+      const directResponse = await githubApi(`/repos/${GH_OWNER}/${GH_REPO}/contents/${emailPath}`);
+      if (directResponse.content) {
+        found = true;
+      }
+    } catch (e) {
+      // Not found at direct path, search subdirectories
+    }
+
+    if (!found) {
+      // Search in logs directory for any EMAIL_TO_SEND.md
+      const logsResponse = await githubApi(`/repos/${GH_OWNER}/${GH_REPO}/contents/logs`);
+      if (Array.isArray(logsResponse)) {
+        for (const item of logsResponse) {
+          if (item.type === 'dir') {
+            try {
+              const subResponse = await githubApi(`/repos/${GH_OWNER}/${GH_REPO}/contents/logs/${item.name}`);
+              if (Array.isArray(subResponse)) {
+                const emailFile = subResponse.find(f => f.name === 'EMAIL_TO_SEND.md');
+                if (emailFile) {
+                  emailPath = emailFile.path;
+                  found = true;
+                  break;
+                }
+              }
+            } catch (e) {
+              // Skip this directory
+            }
+          }
+        }
+      }
+    }
+
+    if (!found) {
+      return res.status(404).json({ error: `No EMAIL_TO_SEND.md found for job ${jobId}` });
+    }
+
+    // Trigger email with the found path
+    await emailLeadAnalysisIfPresent(jobId, [emailPath]);
+    res.json({ success: true, message: `Email triggered for job ${jobId}`, emailPath });
+  } catch (err) {
+    console.error('Failed to trigger email:', err);
+    res.status(500).json({ error: err.message || 'Failed to trigger email' });
   }
 });
 
