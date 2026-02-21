@@ -8,6 +8,7 @@ export interface Business {
   state: string;
   zipCode: string;
   website: string | null;
+  websiteSource?: "outscraper" | "google_search"; // Where website URL came from
   category: string;
   rating: number | null;
   reviewCount: number | null;

@@ -15,7 +15,26 @@ export function scoreLead(
   // No website at all - best prospect!
   if (!business.website) {
     score += 50;
-    reasons.push("Has no website");
+    reasons.push("Has no website (verified via Google)");
+  } else if (business.websiteSource === "google_search") {
+    // Website was found via Google (not in Outscraper data)
+    // Still worth analyzing but note it wasn't in Google Maps
+    score += 10;
+    reasons.push("Website found via Google (not in Maps listing)");
+    if (websiteAnalysis) {
+      // Continue with normal website analysis
+      const qualityScore = websiteAnalysis.score;
+      if (qualityScore < 30) {
+        score += 35;
+        reasons.push("Website has major issues");
+      } else if (qualityScore < 50) {
+        score += 25;
+        reasons.push("Website needs improvements");
+      } else if (qualityScore < 70) {
+        score += 15;
+        reasons.push("Website could use updates");
+      }
+    }
   } else if (websiteAnalysis) {
     // Has website but it might be bad
     if (!websiteAnalysis.exists) {

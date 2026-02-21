@@ -2,6 +2,7 @@
 import { task, logger } from "@trigger.dev/sdk/v3";
 import { z } from "zod";
 import { searchAllCategories, setSearchConfig } from "./outscraper.js";
+import { verifyNoWebsiteBusinesses } from "./google-verifier.js";
 import { analyzeWebsites } from "./website-analyzer.js";
 import { rankLeads } from "./lead-scorer.js";
 import { sendLeadsEmail } from "./email-sender.js";
@@ -223,7 +224,7 @@ export const findLeadsTask = task({
     logger.info(`📍 Searching ${searchCategories.length} categories...`);
 
     // Search 3 businesses per category to get good coverage
-    const businesses = await searchAllCategories(searchCategories, 3);
+    let businesses = await searchAllCategories(searchCategories, 3);
 
     logger.info(`Found ${businesses.length} businesses`);
 
@@ -234,6 +235,16 @@ export const findLeadsTask = task({
         businesses: [],
         leads: [],
       };
+    }
+
+    // Step 1.5: Verify businesses without websites via Google Search
+    // This catches false positives where Outscraper missed the website
+    const businessesWithoutWebsite = businesses.filter((b) => !b.website).length;
+    if (businessesWithoutWebsite > 0) {
+      logger.info(`🔍 Verifying ${businessesWithoutWebsite} businesses without websites...`);
+      businesses = await verifyNoWebsiteBusinesses(businesses);
+      const verified = businesses.filter((b) => b.websiteSource === "google_search").length;
+      logger.info(`✅ Found ${verified} websites via Google Search`);
     }
 
     // Step 2: Analyze websites
