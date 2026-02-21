@@ -8,6 +8,8 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
+    # Only run if auto-merge workflow completed but PR was NOT merged
+    # (merged PRs are already notified by auto-merge.yml after successful merge)
     if: startsWith(github.event.workflow_run.head_branch, 'job/')
     permissions:
       contents: read
@@ -47,20 +49,31 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
+      - name: Check if PR was merged
+        id: check-merged
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PR_NUMBER="${{ steps.pr.outputs.number }}"
+          PR_MERGED=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json mergedAt -q '.mergedAt')
+          if [ -n "$PR_MERGED" ] && [ "$PR_MERGED" != "null" ]; then
+            echo "merged=true" >> "$GITHUB_OUTPUT"
+            echo "PR was merged - auto-merge.yml already sent notification"
+          else
+            echo "merged=false" >> "$GITHUB_OUTPUT"
+            echo "PR was NOT merged - will send notification"
+          fi
+
       - name: Gather job results and notify
+        # Only notify if PR was NOT merged (merged PRs are already handled by auto-merge.yml)
+        if: steps.check-merged.outputs.merged == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           PR_NUMBER="${{ steps.pr.outputs.number }}"
           BRANCH="${{ github.event.workflow_run.head_branch }}"
           JOB_ID="${BRANCH#job/}"
-          # Check actual PR merge state (workflow conclusion doesn't distinguish skipped merge from successful merge)
-          PR_MERGED=$(gh pr view "$PR_NUMBER" --repo "${{ github.repository }}" --json mergedAt -q '.mergedAt')
-          if [ -n "$PR_MERGED" ] && [ "$PR_MERGED" != "null" ]; then
-            MERGE_RESULT="merged"
-          else
-            MERGE_RESULT="not_merged"
-          fi
+          MERGE_RESULT="not_merged"
 
           # 1. Read job.md (on disk after checkout)
           JOB_CONTENT=""

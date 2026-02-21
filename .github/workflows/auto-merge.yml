@@ -111,7 +111,73 @@ jobs:
 
       - name: Merge PR
         if: steps.merge-check.outputs.mergeable == 'MERGEABLE' && steps.check-setting.outputs.enabled == 'true' && steps.check-paths.outputs.allowed == 'true'
+        id: merge
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh pr merge ${{ github.event.pull_request.number }} --squash --repo "${{ github.repository }}"
+          echo "merged=true" >> "$GITHUB_OUTPUT"
+
+      - name: Send webhook notification after merge
+        if: steps.merge.outputs.merged == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_WEBHOOK_URL: ${{ vars.GH_WEBHOOK_URL }}
+          GH_WEBHOOK_SECRET: ${{ secrets.GH_WEBHOOK_SECRET }}
+        run: |
+          PR_NUMBER="${{ github.event.pull_request.number }}"
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          JOB_ID="${BRANCH#job/}"
+          PR_URL="${{ github.event.pull_request.html_url }}"
+          PR_TITLE="${{ github.event.pull_request.title }}"
+
+          echo "Sending webhook notification for merged job: $JOB_ID"
+
+          # Wait a moment for merge to propagate
+          sleep 3
+
+          # Get commit message from PR
+          COMMIT_MSG=$(gh pr view "$PR_NUMBER" --json commits --jq '.commits[-1].messageHeadline' --repo "${{ github.repository }}" 2>/dev/null || echo "")
+
+          # Get changed files
+          CHANGED_FILES=$(gh pr diff "$PR_NUMBER" --name-only --repo "${{ github.repository }}" 2>/dev/null || echo "")
+
+          # Build JSON payload
+          jq -n \
+            --arg action "closed" \
+            --arg html_url "$PR_URL" \
+            --arg title "$PR_TITLE" \
+            --argjson number "$PR_NUMBER" \
+            --arg head_ref "$BRANCH" \
+            --arg job "" \
+            --arg commit_message "$COMMIT_MSG" \
+            --arg changed_files "$CHANGED_FILES" \
+            --arg pr_status "MERGED" \
+            --arg log "" \
+            --arg merge_result "merged" \
+            '{
+              action: $action,
+              pull_request: {
+                html_url: $html_url,
+                title: $title,
+                number: $number,
+                head: { ref: $head_ref }
+              },
+              job_results: {
+                job: $job,
+                commit_message: $commit_message,
+                changed_files: ($changed_files | split("\n") | map(select(length > 0))),
+                pr_status: $pr_status,
+                log: $log,
+                merge_result: $merge_result
+              }
+            }' > /tmp/payload.json
+
+          # Send to event handler
+          curl -s -X POST "${GH_WEBHOOK_URL}/github/webhook" \
+            -H "Content-Type: application/json" \
+            -H "X-GitHub-Event: pull_request" \
+            -H "X-GitHub-Webhook-Secret-Token: ${GH_WEBHOOK_SECRET}" \
+            -d @/tmp/payload.json
+
+          echo "Webhook notification sent for job $JOB_ID"
