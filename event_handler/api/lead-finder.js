@@ -28,6 +28,7 @@ async function triggerLeadSearch(params) {
     leadCount: params.leadCount || 20,
     sendEmail: params.sendEmail !== false,
     sendToJarvis: params.sendToJarvis !== false,
+    services: params.services || ['website'], // Services you offer (default: website)
   };
 
   // Only include categories if specified (empty = all categories)
@@ -108,6 +109,7 @@ function setupLeadFinderRoutes(app, authMiddleware) {
         radiusMiles,
         leadCount,
         categories,
+        services,
         recipientEmail,
         sendEmail,
         sendToJarvis,
@@ -128,13 +130,14 @@ function setupLeadFinderRoutes(app, authMiddleware) {
         return res.status(400).json({ error: 'Lead count must be between 1 and 50.' });
       }
 
-      console.log('Starting lead search:', { zipCode, radiusMiles, leadCount, categories: categories?.length || 'all' });
+      console.log('Starting lead search:', { zipCode, radiusMiles, leadCount, categories: categories?.length || 'all', services: services || ['website'] });
 
       const result = await triggerLeadSearch({
         zipCode,
         radiusMiles,
         leadCount,
         categories,
+        services,
         recipientEmail,
         sendEmail,
         sendToJarvis,

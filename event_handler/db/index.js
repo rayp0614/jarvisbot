@@ -40,11 +40,25 @@ db.exec(`
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
   );
 
+  -- Cron execution history
+  CREATE TABLE IF NOT EXISTS cron_executions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    type TEXT,
+    status TEXT NOT NULL,
+    error_message TEXT,
+    result TEXT,
+    duration_ms INTEGER,
+    executed_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
   -- Create indexes
   CREATE INDEX IF NOT EXISTS idx_jobs_created_at ON jobs(created_at DESC);
   CREATE INDEX IF NOT EXISTS idx_jobs_status ON jobs(status);
   CREATE INDEX IF NOT EXISTS idx_messages_chat_id ON messages(chat_id);
   CREATE INDEX IF NOT EXISTS idx_activity_timestamp ON activity(timestamp DESC);
+  CREATE INDEX IF NOT EXISTS idx_cron_executions_name ON cron_executions(name);
+  CREATE INDEX IF NOT EXISTS idx_cron_executions_executed_at ON cron_executions(executed_at DESC);
 `);
 
 // Prepared statements for common operations
@@ -90,6 +104,18 @@ const statements = {
   `),
   getMessages: db.prepare(`
     SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp DESC LIMIT ?
+  `),
+
+  // Cron Executions
+  insertCronExecution: db.prepare(`
+    INSERT INTO cron_executions (name, type, status, error_message, result, duration_ms)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `),
+  getRecentCronExecutions: db.prepare(`
+    SELECT * FROM cron_executions ORDER BY executed_at DESC LIMIT ?
+  `),
+  getCronExecutionsByName: db.prepare(`
+    SELECT * FROM cron_executions WHERE name = ? ORDER BY executed_at DESC LIMIT ?
   `),
 };
 
@@ -148,6 +174,29 @@ const dbApi = {
 
   getMessages(chatId, limit = 50) {
     return statements.getMessages.all(chatId, limit);
+  },
+
+  // Cron Executions
+  logCronExecution(name, type, status, errorMessage, result, durationMs) {
+    statements.insertCronExecution.run(
+      name,
+      type,
+      status,
+      errorMessage || null,
+      result || null,
+      durationMs
+    );
+    if (status === 'failed') {
+      this.logActivity('cron_failed', `Cron "${name}" failed: ${errorMessage}`);
+    }
+  },
+
+  getRecentCronExecutions(limit = 50) {
+    return statements.getRecentCronExecutions.all(limit);
+  },
+
+  getCronExecutionsByName(name, limit = 20) {
+    return statements.getCronExecutionsByName.all(name, limit);
   },
 };
 

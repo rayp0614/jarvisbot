@@ -37,6 +37,11 @@ function setupSalesRoutes(app, authMiddleware) {
           startDate = getDateDaysAgo(30);
           endDate = today;
           break;
+        case 'all':
+          // No date filtering - get all data
+          startDate = null;
+          endDate = null;
+          break;
         default:
           startDate = req.query.startDate;
           endDate = req.query.endDate;
@@ -67,20 +72,34 @@ function setupSalesRoutes(app, authMiddleware) {
       const { period = 'month' } = req.query;
       const today = getTodayDate();
 
-      let startDate;
+      let startDate = null;
+      let endDate = null;
       switch (period) {
         case 'today':
           startDate = today;
+          endDate = today;
           break;
         case 'week':
           startDate = getDateDaysAgo(7);
+          endDate = today;
           break;
         case 'month':
+          startDate = getDateDaysAgo(30);
+          endDate = today;
+          break;
+        case 'all':
+          // No date filtering
+          break;
+        case 'custom':
+          startDate = req.query.startDate || null;
+          endDate = req.query.endDate || null;
+          break;
         default:
           startDate = getDateDaysAgo(30);
+          endDate = today;
       }
 
-      const result = await getSalesData({ startDate, endDate: today });
+      const result = await getSalesData({ startDate, endDate });
       if (!result.success) {
         return res.status(500).json({ error: result.error });
       }
@@ -103,20 +122,34 @@ function setupSalesRoutes(app, authMiddleware) {
       const { period = 'month' } = req.query;
       const today = getTodayDate();
 
-      let startDate;
+      let startDate = null;
+      let endDate = null;
       switch (period) {
         case 'today':
           startDate = today;
+          endDate = today;
           break;
         case 'week':
           startDate = getDateDaysAgo(7);
+          endDate = today;
           break;
         case 'month':
+          startDate = getDateDaysAgo(30);
+          endDate = today;
+          break;
+        case 'all':
+          // No date filtering
+          break;
+        case 'custom':
+          startDate = req.query.startDate || null;
+          endDate = req.query.endDate || null;
+          break;
         default:
           startDate = getDateDaysAgo(30);
+          endDate = today;
       }
 
-      const result = await getSalesData({ startDate, endDate: today });
+      const result = await getSalesData({ startDate, endDate });
       if (!result.success) {
         return res.status(500).json({ error: result.error });
       }
@@ -148,20 +181,34 @@ function setupSalesRoutes(app, authMiddleware) {
       const { period = 'month' } = req.query;
       const today = getTodayDate();
 
-      let startDate;
+      let startDate = null;
+      let endDate = null;
       switch (period) {
         case 'today':
           startDate = today;
+          endDate = today;
           break;
         case 'week':
           startDate = getDateDaysAgo(7);
+          endDate = today;
           break;
         case 'month':
+          startDate = getDateDaysAgo(30);
+          endDate = today;
+          break;
+        case 'all':
+          // No date filtering
+          break;
+        case 'custom':
+          startDate = req.query.startDate || null;
+          endDate = req.query.endDate || null;
+          break;
         default:
           startDate = getDateDaysAgo(30);
+          endDate = today;
       }
 
-      const result = await getSalesData({ startDate, endDate: today });
+      const result = await getSalesData({ startDate, endDate });
       if (!result.success) {
         return res.status(500).json({ error: result.error });
       }
@@ -182,7 +229,8 @@ function setupSalesRoutes(app, authMiddleware) {
   app.get('/api/sales/recent', authMiddleware, async (req, res) => {
     try {
       const { limit = 20 } = req.query;
-      const result = await getSalesData({ startDate: getDateDaysAgo(7) });
+      // Get all data for recent deals (sorted by date)
+      const result = await getSalesData({});
 
       if (!result.success) {
         return res.status(500).json({ error: result.error });

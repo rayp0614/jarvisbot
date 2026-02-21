@@ -4,7 +4,41 @@ const path = require('path');
 require('dotenv').config();
 
 const { executeAction } = require('./actions');
+const { sendMessage, escapeHtml } = require('./tools/telegram');
 const CRON_DIR = path.join(__dirname, 'cron');
+
+// Database (optional - graceful if not available)
+let db = null;
+try {
+  db = require('./db');
+} catch (err) {
+  console.warn('SQLite not available - cron logging disabled');
+}
+
+// Telegram config
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+/**
+ * Send Telegram alert for cron failure
+ */
+async function sendCronFailureAlert(name, schedule, errorMessage, durationMs) {
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+    return;
+  }
+
+  const message =
+    `⚠️ <b>Cron Failed: ${escapeHtml(name)}</b>\n\n` +
+    `<b>Schedule:</b> <code>${escapeHtml(schedule)}</code>\n` +
+    `<b>Error:</b> ${escapeHtml(errorMessage)}\n` +
+    `<b>Duration:</b> ${durationMs}ms`;
+
+  try {
+    await sendMessage(TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, message);
+  } catch (err) {
+    console.error('Failed to send Telegram alert:', err.message);
+  }
+}
 
 /**
  * Load and schedule crons from CRONS.json
@@ -34,12 +68,30 @@ function loadCrons() {
     }
 
     const task = cron.schedule(schedule, async () => {
+      const startTime = Date.now();
+
       try {
         const result = await executeAction(cronEntry, { cwd: CRON_DIR });
+        const duration = Date.now() - startTime;
+
         console.log(`[CRON] ${name}: ${result || 'ran'}`);
-        console.log(`[CRON] ${name}: completed!`);
+        console.log(`[CRON] ${name}: completed in ${duration}ms`);
+
+        // Log success to database
+        if (db) {
+          db.logCronExecution(name, type, 'success', null, result, duration);
+        }
       } catch (err) {
+        const duration = Date.now() - startTime;
         console.error(`[CRON] ${name}: error - ${err.message}`);
+
+        // Log failure to database
+        if (db) {
+          db.logCronExecution(name, type, 'failed', err.message, null, duration);
+        }
+
+        // Send Telegram alert
+        await sendCronFailureAlert(name, schedule, err.message, duration);
       }
     });
 

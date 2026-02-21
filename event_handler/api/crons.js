@@ -49,11 +49,26 @@ function setupCronsRoutes(app, authMiddleware, db) {
       if (updates.schedule) {
         crons[index].schedule = updates.schedule;
       }
+      if (updates.type) {
+        crons[index].type = updates.type;
+      }
       if (updates.job !== undefined) {
         crons[index].job = updates.job;
       }
       if (updates.command !== undefined) {
         crons[index].command = updates.command;
+      }
+      if (updates.url !== undefined) {
+        crons[index].url = updates.url;
+      }
+      if (updates.method !== undefined) {
+        crons[index].method = updates.method;
+      }
+      if (updates.headers !== undefined) {
+        crons[index].headers = updates.headers;
+      }
+      if (updates.vars !== undefined) {
+        crons[index].vars = updates.vars;
       }
 
       saveCrons(crons);
@@ -129,6 +144,31 @@ function setupCronsRoutes(app, authMiddleware, db) {
     } catch (error) {
       console.error('Error deleting cron:', error);
       res.status(500).json({ error: 'Failed to delete cron' });
+    }
+  });
+
+  // Get all recent cron executions
+  app.get('/api/crons/executions', authMiddleware, (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit) || 50;
+      const executions = db.getRecentCronExecutions(limit);
+      res.json(executions);
+    } catch (error) {
+      console.error('Error getting cron executions:', error);
+      res.status(500).json({ error: 'Failed to get executions' });
+    }
+  });
+
+  // Get executions for a specific cron
+  app.get('/api/crons/:name/executions', authMiddleware, (req, res) => {
+    try {
+      const { name } = req.params;
+      const limit = parseInt(req.query.limit) || 20;
+      const executions = db.getCronExecutionsByName(name, limit);
+      res.json(executions);
+    } catch (error) {
+      console.error('Error getting cron executions:', error);
+      res.status(500).json({ error: 'Failed to get executions' });
     }
   });
 }

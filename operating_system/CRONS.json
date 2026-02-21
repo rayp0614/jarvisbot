@@ -1,61 +1,43 @@
 [
   {
-    "name": "heartbeat",
-    "schedule": "*/30 * * * *",
-    "type": "agent",
-    "job": "Read the file at operating_system/HEARTBEAT.md and complete the tasks described there.",
-    "enabled": false
-  },
-  {
-    "name": "daily-check",
-    "schedule": "0 9 * * *",
-    "type": "agent",
-    "job": "Check for dependency updates in package.json and report any outdated packages.",
-    "enabled": false
-  },
-  {
-    "name": "ping",
-    "schedule": "*/1 * * * *",
-    "type": "command",
-    "command": "echo \"pong!\"",
-    "enabled": true
-  },
-  {
-    "name": "cleanup-logs",
-    "schedule": "0 0 * * 0",
-    "type": "command",
-    "command": "ls -la logs/",
-    "enabled": false
-  },
-  {
-    "name": "ping-status",
-    "schedule": "*/5 * * * *",
-    "type": "http",
-    "url": "https://example.com/status",
-    "method": "POST",
-    "vars": { "source": "heartbeat" },
-    "enabled": false
-  },
-  {
     "name": "health-check",
     "schedule": "*/10 * * * *",
     "type": "http",
-    "url": "https://example.com/health",
+    "url": "https://simplifaisolutions.com",
     "method": "GET",
-    "enabled": false
+    "enabled": true,
+    "_comment": "Replace URL with your actual website to monitor uptime"
   },
   {
-    "name": "daily-financial-research",
-    "schedule": "0 14 * * 1-5",
-    "type": "agent",
-    "job": "Read the file at operating_system/FINANCIAL_ADVISOR/FINANCIAL_ADVISOR.md and complete the tasks described there.",
-    "enabled": true
+    "name": "daily-ai-news",
+    "schedule": "0 8 * * 1-5",
+    "type": "command",
+    "command": "node cron/daily-ai-news.js",
+    "enabled": true,
+    "_comment": "Daily AI industry news digest at 8am weekdays"
   },
   {
     "name": "daily-sales-summary",
     "schedule": "0 8 * * 1-5",
     "type": "command",
     "command": "node cron/daily-sales-summary.js",
-    "enabled": false
+    "enabled": true,
+    "_comment": "Daily sales summary at 8am weekdays"
+  },
+  {
+    "name": "weekly-leaderboard",
+    "schedule": "0 9 * * 1",
+    "type": "command",
+    "command": "node cron/weekly-leaderboard.js",
+    "enabled": true,
+    "_comment": "Weekly sales leaderboard every Monday at 9am"
+  },
+  {
+    "name": "sales-milestones",
+    "schedule": "0 17 * * 1-5",
+    "type": "command",
+    "command": "node cron/sales-milestones.js",
+    "enabled": true,
+    "_comment": "Check for $1K+ milestones at 5pm weekdays"
   }
 ]

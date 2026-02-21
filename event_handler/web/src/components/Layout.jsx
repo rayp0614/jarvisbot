@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 const navItems = [
   { to: '/', icon: Home, label: 'Dashboard' },
-  { to: '/lead-finder', icon: Search, label: 'Lead Finder' },
+  { to: '/lead-finder', icon: Search, label: 'Lead Gen' },
   { to: '/crons', icon: Clock, label: 'Cron Jobs' },
   { to: '/triggers', icon: Zap, label: 'Triggers' },
   { to: '/jobs', icon: Briefcase, label: 'Jobs' },

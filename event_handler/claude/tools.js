@@ -2,6 +2,7 @@ const { createJob } = require('../tools/create-job');
 const { getJobStatus } = require('../tools/github');
 const { createCalendarEvent, listUpcomingEvents, isCalendarEnabled } = require('../tools/google-calendar');
 const { sendEmail, isEmailEnabled } = require('../tools/email');
+const { getSalesData, calculateAnalytics, isSheetsEnabled, getTodayDate, getDateDaysAgo } = require('../tools/google-sheets');
 
 const toolDefinitions = [
   {
@@ -113,6 +114,73 @@ const toolDefinitions = [
       required: ['subject', 'body'],
     },
   },
+  {
+    name: 'get_sales_summary',
+    description:
+      'Get sales summary and analytics. Use this when the user asks about sales performance, total revenue, deal counts, or sales metrics. Returns total sales, average deal size, deal counts, and pipeline stats.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        period: {
+          type: 'string',
+          description: 'Time period: "today", "week", "month", or "all" for all time (default: "month")',
+          enum: ['today', 'week', 'month', 'all'],
+        },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'get_sales_reps',
+    description:
+      'Get sales rep performance and leaderboard. Use this when the user asks about top performers, rep rankings, who is selling the most, or individual rep performance.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        period: {
+          type: 'string',
+          description: 'Time period: "today", "week", "month", or "all" for all time (default: "month")',
+          enum: ['today', 'week', 'month', 'all'],
+        },
+        limit: {
+          type: 'number',
+          description: 'Maximum number of reps to return (default: 10)',
+        },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'get_sales_teams',
+    description:
+      'Get team performance and leaderboard. Use this when the user asks about team rankings, which team is performing best, or team comparisons.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        period: {
+          type: 'string',
+          description: 'Time period: "today", "week", "month", or "all" for all time (default: "month")',
+          enum: ['today', 'week', 'month', 'all'],
+        },
+      },
+      required: [],
+    },
+  },
+  {
+    name: 'get_recent_deals',
+    description:
+      'Get recent sales deals. Use this when the user asks about recent sales, latest deals, or what was sold recently.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        limit: {
+          type: 'number',
+          description: 'Maximum number of deals to return (default: 10)',
+        },
+      },
+      required: [],
+    },
+  },
 ];
 
 const toolExecutors = {
@@ -162,6 +230,152 @@ const toolExecutors = {
       isHtml: input.isHtml,
     });
     return result;
+  },
+  get_sales_summary: async (input) => {
+    if (!isSheetsEnabled()) {
+      return { success: false, error: 'Sales data is not configured. Set GOOGLE_SHEETS_CREDENTIALS and SALES_SPREADSHEET_ID.' };
+    }
+    const period = input.period || 'month';
+    const today = getTodayDate();
+    let startDate = null;
+
+    switch (period) {
+      case 'today':
+        startDate = today;
+        break;
+      case 'week':
+        startDate = getDateDaysAgo(7);
+        break;
+      case 'month':
+        startDate = getDateDaysAgo(30);
+        break;
+      case 'all':
+        startDate = null;
+        break;
+    }
+
+    const result = await getSalesData({ startDate });
+    if (!result.success) {
+      return { success: false, error: result.error };
+    }
+
+    const analytics = calculateAnalytics(result.sales);
+    return {
+      success: true,
+      period,
+      totalSales: analytics.totalSales,
+      totalDeals: analytics.totalDeals,
+      avgDealSize: Math.round(analytics.avgDealSize),
+      pipelineStats: analytics.pipelineStats,
+    };
+  },
+  get_sales_reps: async (input) => {
+    if (!isSheetsEnabled()) {
+      return { success: false, error: 'Sales data is not configured' };
+    }
+    const period = input.period || 'month';
+    const limit = input.limit || 10;
+    const today = getTodayDate();
+    let startDate = null;
+
+    switch (period) {
+      case 'today':
+        startDate = today;
+        break;
+      case 'week':
+        startDate = getDateDaysAgo(7);
+        break;
+      case 'month':
+        startDate = getDateDaysAgo(30);
+        break;
+      case 'all':
+        startDate = null;
+        break;
+    }
+
+    const result = await getSalesData({ startDate });
+    if (!result.success) {
+      return { success: false, error: result.error };
+    }
+
+    const analytics = calculateAnalytics(result.sales);
+    return {
+      success: true,
+      period,
+      reps: analytics.topReps.slice(0, limit).map(rep => ({
+        name: rep.name,
+        totalSA: rep.totalSA,
+        deals: rep.deals,
+      })),
+    };
+  },
+  get_sales_teams: async (input) => {
+    if (!isSheetsEnabled()) {
+      return { success: false, error: 'Sales data is not configured' };
+    }
+    const period = input.period || 'month';
+    const today = getTodayDate();
+    let startDate = null;
+
+    switch (period) {
+      case 'today':
+        startDate = today;
+        break;
+      case 'week':
+        startDate = getDateDaysAgo(7);
+        break;
+      case 'month':
+        startDate = getDateDaysAgo(30);
+        break;
+      case 'all':
+        startDate = null;
+        break;
+    }
+
+    const result = await getSalesData({ startDate });
+    if (!result.success) {
+      return { success: false, error: result.error };
+    }
+
+    const analytics = calculateAnalytics(result.sales);
+    return {
+      success: true,
+      period,
+      teams: analytics.teamStats.map(team => ({
+        name: team.name,
+        group: team.group,
+        totalSA: team.totalSA,
+        deals: team.deals,
+      })),
+    };
+  },
+  get_recent_deals: async (input) => {
+    if (!isSheetsEnabled()) {
+      return { success: false, error: 'Sales data is not configured' };
+    }
+    const limit = input.limit || 10;
+
+    const result = await getSalesData({});
+    if (!result.success) {
+      return { success: false, error: result.error };
+    }
+
+    const recentDeals = result.sales
+      .sort((a, b) => (b.sold_date || '').localeCompare(a.sold_date || ''))
+      .slice(0, limit)
+      .map(deal => ({
+        date: deal.sold_date,
+        rep: deal.sales_rep,
+        team: deal.team_name,
+        source: deal.source,
+        amount: deal.SA,
+        stage: deal.deal_stage,
+      }));
+
+    return {
+      success: true,
+      deals: recentDeals,
+    };
   },
 };
 

@@ -10,9 +10,35 @@ import {
   Loader2,
   CheckCircle,
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  Target,
+  Globe,
+  Share2,
+  Cpu
 } from 'lucide-react';
 import { apiPost, apiFetch } from '../lib/api';
+
+// Services you offer (for AI-tailored outreach)
+const SERVICE_OPTIONS = [
+  {
+    id: 'website',
+    label: 'Website Development',
+    description: 'Full websites, landing pages, redesigns',
+    icon: Globe
+  },
+  {
+    id: 'social',
+    label: 'Social Media Content',
+    description: 'Posts, graphics, content calendars',
+    icon: Share2
+  },
+  {
+    id: 'ai',
+    label: 'AI Automation',
+    description: 'Chatbots, workflow automation, AI tools',
+    icon: Cpu
+  },
+];
 
 // Available business categories to search
 const BUSINESS_CATEGORIES = [
@@ -45,6 +71,7 @@ function LeadFinder() {
     radiusMiles: 20,
     leadCount: 20,
     categories: [], // Empty = all categories
+    services: ['website'], // Services you offer (default: website)
     recipientEmail: '',
     sendEmail: true,
     sendToJarvis: true,
@@ -80,6 +107,15 @@ function LeadFinder() {
       categories: prev.categories.includes(categoryId)
         ? prev.categories.filter(c => c !== categoryId)
         : [...prev.categories, categoryId]
+    }));
+  };
+
+  const handleServiceToggle = (serviceId) => {
+    setFormData(prev => ({
+      ...prev,
+      services: prev.services.includes(serviceId)
+        ? prev.services.filter(s => s !== serviceId)
+        : [...prev.services, serviceId]
     }));
   };
 
@@ -281,6 +317,55 @@ function LeadFinder() {
                   />
                 </button>
               </div>
+            </div>
+
+            {/* Services You Offer */}
+            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border border-blue-100">
+              <h3 className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-1">
+                <Target size={16} />
+                Services You Offer
+              </h3>
+              <p className="text-xs text-gray-500 mb-4">
+                Select the services you want to pitch — AI will tailor outreach scripts accordingly
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {SERVICE_OPTIONS.map((service) => {
+                  const Icon = service.icon;
+                  const isSelected = formData.services.includes(service.id);
+                  return (
+                    <label
+                      key={service.id}
+                      className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
+                        isSelected
+                          ? 'bg-white border-blue-300 ring-2 ring-blue-500/20 shadow-sm'
+                          : 'bg-white/50 border-gray-200 hover:bg-white hover:border-gray-300'
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={() => handleServiceToggle(service.id)}
+                        className="sr-only"
+                      />
+                      <div className={`mt-0.5 ${isSelected ? 'text-blue-600' : 'text-gray-400'}`}>
+                        <Icon size={18} />
+                      </div>
+                      <div>
+                        <span className={`font-medium text-sm ${isSelected ? 'text-blue-900' : 'text-gray-700'}`}>
+                          {service.label}
+                        </span>
+                        <p className="text-xs text-gray-500 mt-0.5">{service.description}</p>
+                      </div>
+                    </label>
+                  );
+                })}
+              </div>
+              {formData.services.length === 0 && (
+                <p className="text-xs text-amber-600 mt-2 flex items-center gap-1">
+                  <AlertCircle size={12} />
+                  Select at least one service for better AI analysis
+                </p>
+              )}
             </div>
 
             {/* Submit Button */}

@@ -27,15 +27,17 @@ function StatCard({ icon: Icon, label, value, subtext, color }) {
   );
 }
 
-function PeriodSelector({ value, onChange }) {
+function PeriodSelector({ value, onChange, customDates, onCustomDatesChange }) {
   const periods = [
     { key: 'today', label: 'Today' },
     { key: 'week', label: 'This Week' },
     { key: 'month', label: 'This Month' },
+    { key: 'all', label: 'All Time' },
+    { key: 'custom', label: 'Custom' },
   ];
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {periods.map(({ key, label }) => (
         <button
           key={key}
@@ -49,6 +51,23 @@ function PeriodSelector({ value, onChange }) {
           {label}
         </button>
       ))}
+      {value === 'custom' && (
+        <div className="flex items-center gap-2 ml-2">
+          <input
+            type="date"
+            value={customDates.startDate}
+            onChange={(e) => onCustomDatesChange({ ...customDates, startDate: e.target.value })}
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+          />
+          <span className="text-gray-500">to</span>
+          <input
+            type="date"
+            value={customDates.endDate}
+            onChange={(e) => onCustomDatesChange({ ...customDates, endDate: e.target.value })}
+            className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -63,7 +82,19 @@ function formatCurrency(value) {
 }
 
 function Sales() {
-  const [period, setPeriod] = useState('month');
+  const [period, setPeriod] = useState('all');
+  const [customDates, setCustomDates] = useState({
+    startDate: new Date().toISOString().split('T')[0],
+    endDate: new Date().toISOString().split('T')[0],
+  });
+
+  // Build query params based on period
+  const getQueryParams = () => {
+    if (period === 'custom') {
+      return `period=custom&startDate=${customDates.startDate}&endDate=${customDates.endDate}`;
+    }
+    return `period=${period}`;
+  };
 
   const { data: status } = useQuery({
     queryKey: ['sales-status'],
@@ -71,27 +102,27 @@ function Sales() {
   });
 
   const { data: summary, isLoading } = useQuery({
-    queryKey: ['sales-summary', period],
-    queryFn: () => apiFetch(`/api/sales/summary?period=${period}`),
+    queryKey: ['sales-summary', period, customDates],
+    queryFn: () => apiFetch(`/api/sales/summary?${getQueryParams()}`),
     enabled: status?.enabled,
     refetchInterval: 60000,
   });
 
   const { data: repsData } = useQuery({
-    queryKey: ['sales-reps', period],
-    queryFn: () => apiFetch(`/api/sales/reps?period=${period}`),
+    queryKey: ['sales-reps', period, customDates],
+    queryFn: () => apiFetch(`/api/sales/reps?${getQueryParams()}`),
     enabled: status?.enabled,
   });
 
   const { data: teamsData } = useQuery({
-    queryKey: ['sales-teams', period],
-    queryFn: () => apiFetch(`/api/sales/teams?period=${period}`),
+    queryKey: ['sales-teams', period, customDates],
+    queryFn: () => apiFetch(`/api/sales/teams?${getQueryParams()}`),
     enabled: status?.enabled,
   });
 
   const { data: sourcesData } = useQuery({
-    queryKey: ['sales-sources', period],
-    queryFn: () => apiFetch(`/api/sales/sources?period=${period}`),
+    queryKey: ['sales-sources', period, customDates],
+    queryFn: () => apiFetch(`/api/sales/sources?${getQueryParams()}`),
     enabled: status?.enabled,
   });
 
@@ -138,7 +169,12 @@ function Sales() {
           <h1 className="text-2xl font-bold text-gray-900">Sales Analytics</h1>
           <p className="text-gray-500">Track your team's sales performance</p>
         </div>
-        <PeriodSelector value={period} onChange={setPeriod} />
+        <PeriodSelector
+          value={period}
+          onChange={setPeriod}
+          customDates={customDates}
+          onCustomDatesChange={setCustomDates}
+        />
       </div>
 
       {/* Stats Grid */}

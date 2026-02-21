@@ -8,6 +8,7 @@ import Crons from './pages/Crons';
 import Triggers from './pages/Triggers';
 import Jobs from './pages/Jobs';
 import Sales from './pages/Sales';
+import Chat from './pages/Chat';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -67,6 +68,7 @@ function App() {
         <Route path="/triggers" element={<Triggers />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/sales" element={<Sales />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
