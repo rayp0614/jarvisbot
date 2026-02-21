@@ -1,236 +1,237 @@
 TO: ray.ai.p614@gmail.com
-SUBJECT: 🎯 Lead Analysis: 3 High-Priority Plumbing Leads - 2/21/2026
+SUBJECT: 🎯 Lead Analysis: 3 Hot Prospects - Contact TODAY (2/21/2026)
 FORMAT: html
 
 <html>
-<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9fafb;">
-  
-  <div style="background-color: white; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-    
-    <h1 style="color: #2563eb; margin-top: 0; border-bottom: 3px solid #2563eb; padding-bottom: 10px;">🎯 Top 3 Leads for TODAY</h1>
-    
-    <p style="font-size: 16px; color: #374151; line-height: 1.6;">
-      <strong>Service:</strong> Website Development<br>
-      <strong>Search Area:</strong> 30 miles from 06002<br>
-      <strong>Date:</strong> February 21, 2026
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; }
+    .container { background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1 { color: #2563eb; margin-top: 0; border-bottom: 3px solid #2563eb; padding-bottom: 10px; }
+    h2 { color: #1e40af; margin-top: 25px; }
+    h3 { color: #3b82f6; margin-top: 20px; }
+    .lead-card { background-color: #eff6ff; border-left: 4px solid #2563eb; padding: 15px; margin: 20px 0; border-radius: 5px; }
+    .score { display: inline-block; background-color: #10b981; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 18px; }
+    .score.high { background-color: #10b981; }
+    .score.medium { background-color: #f59e0b; }
+    .phone { color: #2563eb; font-weight: bold; font-size: 16px; }
+    .stars { color: #fbbf24; font-size: 16px; }
+    .highlight { background-color: #fef3c7; padding: 2px 6px; border-radius: 3px; font-weight: bold; }
+    .urgent { background-color: #fee2e2; border-left-color: #ef4444; padding: 15px; margin: 15px 0; border-radius: 5px; border-left: 4px solid #ef4444; }
+    .script { background-color: #f3f4f6; padding: 15px; border-radius: 5px; margin: 10px 0; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6; }
+    .action-item { background-color: #d1fae5; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 3px solid #10b981; }
+    ul { line-height: 1.8; }
+    .emoji { font-size: 20px; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th { background-color: #2563eb; color: white; padding: 12px; text-align: left; }
+    td { padding: 10px; border-bottom: 1px solid #e5e7eb; }
+    tr:hover { background-color: #f9fafb; }
+    .cta { background-color: #2563eb; color: white; padding: 15px 30px; text-align: center; border-radius: 5px; margin: 20px 0; text-decoration: none; display: inline-block; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Lead Analysis: 3 Hot Website Prospects</h1>
+    <p><strong>Date:</strong> February 21, 2026 | <strong>Service Area:</strong> 10 miles from zip 06002</p>
+    <p><strong>Service Offered:</strong> Website Development for Local Businesses</p>
+
+    <div class="urgent">
+      <strong>⏰ ACTION REQUIRED TODAY:</strong> All 3 leads are established plumbing businesses with NO websites. Call window: <strong>7:30 AM - 10:00 AM</strong> (before trucks roll out). These are high-probability conversions!
+    </div>
+
+    <h2>🏆 Top 3 Picks - Prioritized for Today</h2>
+
+    <!-- LEAD #1 -->
+    <div class="lead-card">
+      <h3><span class="emoji">🥇</span> #1: Joe the Plumber</h3>
+      <p><span class="score high">9/10</span> <span class="stars">★★★★★</span> 4.6 (536 reviews)</p>
+      <p class="phone">📞 +1 860-614-7157</p>
+      
+      <p><strong>Why This Lead is GOLD:</strong></p>
+      <ul>
+        <li><span class="highlight">536 reviews = MASSIVE operation</span> - Multi-truck, high-volume business</li>
+        <li>Currently losing <strong>$2,000-4,000/month</strong> in emergency calls to competitors with websites</li>
+        <li>Website pays for itself in <strong>2-3 emergency calls</strong> ($150-400 each)</li>
+        <li>Budget is NOT a concern at this volume</li>
+        <li>Clear ROI: Emergency plumbing = high urgency + high value</li>
+      </ul>
+
+      <p><strong>🎯 Opening Line:</strong></p>
+      <div class="script">
+"Hi, I'm calling because I noticed something interesting about your business on Google. You have 536 reviews with a 4.6-star rating - that's incredible! You're clearly doing amazing work. But you don't have a website, which means you're probably losing 5-10 emergency calls every month to competitors who show up higher in Google searches. At $200-400 per emergency call, that's $2,000-4,000 in lost monthly revenue. Is this something the owner would be interested in learning more about?"
+      </div>
+
+      <p><strong>Best Time to Call:</strong> Tuesday-Thursday, 7:30-9:00 AM (before trucks leave)</p>
+      
+      <div class="action-item">
+        <strong>✅ ACTION:</strong> CALL FIRST TODAY. This is your highest-probability close. Reference their massive review count and quantify lost revenue immediately.
+      </div>
+    </div>
+
+    <!-- LEAD #2 -->
+    <div class="lead-card">
+      <h3><span class="emoji">🥈</span> #2: Anytime Sewer & Drain Services</h3>
+      <p><span class="score high">8/10</span> <span class="stars">★★★★★</span> 4.8 (92 reviews)</p>
+      <p class="phone">📞 +1 860-286-0331</p>
+      
+      <p><strong>Why This Lead Converts:</strong></p>
+      <ul>
+        <li><span class="highlight">HIGHEST rating (4.8 stars)</span> - Should be showcased on website!</li>
+        <li><strong>"Anytime"</strong> brand promise unfulfilled without 24/7 web presence</li>
+        <li>Sewer/drain emergencies = URGENT, high-value services</li>
+        <li>Mid-size operation (92 reviews) = growth phase, perfect timing</li>
+        <li>Specialization needs educational content (website provides this)</li>
+      </ul>
+
+      <p><strong>🎯 Opening Line:</strong></p>
+      <div class="script">
+"Hi, I noticed your business 'Anytime Sewer & Drain Services' on Google, and I have to ask - are you really available 'anytime' if customers can't find you online at 11 PM when their sewer backs up? You have an amazing 4.8-star rating with 92 reviews. But when someone searches 'emergency sewer service near me' at night, they pick the first business with a professional website. I specialize in building 24/7 lead capture websites for sewer and drain specialists. Is the owner available?"
+      </div>
+
+      <p><strong>Best Time to Call:</strong> Tuesday-Thursday, 8:00-9:30 AM</p>
+      
+      <div class="action-item">
+        <strong>✅ ACTION:</strong> CALL SECOND TODAY. Lead with the "Anytime" irony. Emphasize their exceptional 4.8-star rating.
+      </div>
+    </div>
+
+    <!-- LEAD #3 -->
+    <div class="lead-card">
+      <h3><span class="emoji">🥉</span> #3: John's Plumbing & Heating LLC</h3>
+      <p><span class="score medium">7/10</span> <span class="stars">★★★★☆</span> 4.3 (41 reviews)</p>
+      <p class="phone">📞 +1 860-242-4909</p>
+      
+      <p><strong>Why This Lead Works:</strong></p>
+      <ul>
+        <li><strong>Plumbing + Heating</strong> = Dual services need website to cross-sell</li>
+        <li>Smaller operation = More affordable entry-level package</li>
+        <li>Seasonal revenue gaps (heating winter, plumbing summer)</li>
+        <li>LLC structure = Professional business with budget</li>
+        <li>Website solves year-round lead generation problem</li>
+      </ul>
+
+      <p><strong>🎯 Opening Line:</strong></p>
+      <div class="script">
+"Hi, I specialize in helping small plumbing and heating companies grow through affordable websites. I noticed you handle both plumbing AND heating, which is great for year-round revenue. But without a website, you're missing opportunities in both areas. When heating season ends, where do your plumbing leads come from? I have a starter package specifically for growing businesses like yours - usually pays for itself with 3-4 new jobs. Interested in learning more?"
+      </div>
+
+      <p><strong>Best Time to Call:</strong> Tuesday-Thursday, 8:30-10:00 AM</p>
+      
+      <div class="action-item">
+        <strong>✅ ACTION:</strong> CALL THIRD TODAY or tomorrow. Lead with year-round revenue angle. Mention affordable starter package upfront.
+      </div>
+    </div>
+
+    <h2>📊 Priority Ranking Summary</h2>
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Business</th>
+        <th>Score</th>
+        <th>Why They'll Convert</th>
+        <th>Est. Budget</th>
+      </tr>
+      <tr>
+        <td>🥇 #1</td>
+        <td>Joe the Plumber</td>
+        <td><strong>9/10</strong></td>
+        <td>Massive volume, losing $2-4K/month</td>
+        <td>$4,000-6,000</td>
+      </tr>
+      <tr>
+        <td>🥈 #2</td>
+        <td>Anytime Sewer & Drain</td>
+        <td><strong>8/10</strong></td>
+        <td>"Anytime" brand needs 24/7 presence, highest rating</td>
+        <td>$2,500-4,000</td>
+      </tr>
+      <tr>
+        <td>🥉 #3</td>
+        <td>John's Plumbing & Heating</td>
+        <td><strong>7/10</strong></td>
+        <td>Dual services, seasonal revenue gaps, growing business</td>
+        <td>$1,500-2,500</td>
+      </tr>
+    </table>
+
+    <h2>💡 Key Talking Points Across All Leads</h2>
+    <ul>
+      <li><strong>24/7 Lead Capture:</strong> "Your website works while you sleep. Emergency calls at 2 AM go to competitors with websites."</li>
+      <li><strong>Lost Revenue:</strong> "You're losing 5-10 emergency calls per month. At $200-400 per call, that's $2,000-4,000 lost monthly."</li>
+      <li><strong>Quick ROI:</strong> "Website pays for itself with 2-3 new jobs. You're losing more by NOT having one."</li>
+      <li><strong>Mobile-First:</strong> "80% of 'plumber near me' searches happen on phones. If your site isn't mobile-friendly, you're invisible."</li>
+      <li><strong>Review Showcase:</strong> "Your [X] five-star reviews should be front and center. That's instant credibility."</li>
+    </ul>
+
+    <h2>🚫 Objection Handling Cheat Sheet</h2>
+    <table>
+      <tr>
+        <th>Objection</th>
+        <th>Response</th>
+      </tr>
+      <tr>
+        <td>"We're too busy already"</td>
+        <td>"Perfect! That means you can afford to be selective. A website pre-qualifies leads so only serious customers call."</td>
+      </tr>
+      <tr>
+        <td>"Social media is enough"</td>
+        <td>"When someone's basement floods at 2 AM, do they check Facebook or Google? They search 'emergency plumber near me' - that's where you need to be."</td>
+      </tr>
+      <tr>
+        <td>"Too expensive"</td>
+        <td>"Fair concern. But 2-3 emergency calls pays for the entire website. You're actually losing money every month by NOT having one."</td>
+      </tr>
+      <tr>
+        <td>"I'll think about it"</td>
+        <td>"Absolutely, it's an important decision. Can I send you examples of websites we built for [competitor]? Takes 2 minutes to review, no commitment."</td>
+      </tr>
+    </table>
+
+    <h2>📅 Follow-Up Schedule</h2>
+    <div style="background-color: #fef3c7; padding: 15px; border-radius: 5px; margin: 15px 0;">
+      <strong>Day 1 (Today):</strong> Initial phone calls, leave voicemails if needed<br>
+      <strong>Day 2:</strong> Send follow-up emails to voicemails<br>
+      <strong>Day 5:</strong> Second round of calls<br>
+      <strong>Day 7:</strong> Final email with case study/examples<br>
+      <strong>Day 14:</strong> "Just checking in" call
+    </div>
+
+    <h2>🎯 Success Metrics for Today</h2>
+    <div style="background-color: #d1fae5; padding: 20px; border-radius: 5px; margin: 20px 0;">
+      <strong>🎯 Best Case:</strong> 2 out of 3 book discovery calls<br>
+      <strong>🎯 Realistic:</strong> 1 out of 3 books discovery call<br>
+      <strong>🎯 Minimum:</strong> All 3 receive voicemail + email (first contact established)
+    </div>
+
+    <h2>📞 Quick Action Checklist</h2>
+    <div class="action-item">
+      ☐ Call Joe the Plumber (7:30-9:00 AM) - Lead with lost revenue<br>
+      ☐ Call Anytime Sewer & Drain (8:00-9:30 AM) - Lead with "Anytime" irony<br>
+      ☐ Call John's Plumbing & Heating (8:30-10:00 AM) - Lead with year-round revenue<br>
+      ☐ Send follow-up emails by end of day to any voicemails<br>
+      ☐ Prepare website examples for follow-up conversations
+    </div>
+
+    <h2>💰 Pricing Quick Reference</h2>
+    <ul>
+      <li><strong>Joe the Plumber:</strong> Premium Package ($4,000-6,000) - They can afford it and need robust features</li>
+      <li><strong>Anytime Sewer & Drain:</strong> Professional Package ($2,500-4,000) - Mid-tier with emergency features</li>
+      <li><strong>John's Plumbing & Heating:</strong> Starter Package ($1,500-2,500) - Budget-friendly with room to grow</li>
+    </ul>
+
+    <div style="background-color: #2563eb; color: white; padding: 20px; text-align: center; border-radius: 10px; margin-top: 30px;">
+      <h2 style="color: white; margin-top: 0;">🚀 Bottom Line</h2>
+      <p style="font-size: 16px; line-height: 1.6;">
+        These are three <strong>high-quality leads</strong> with clear pain points and strong ROI potential. All lack websites entirely (not just bad ones), making the value proposition crystal clear. Focus on lost revenue and emergency call capture. If you close even ONE of these, you're looking at $1,500-6,000 in revenue.
+      </p>
+      <p style="font-size: 18px; margin-bottom: 0;"><strong>Get on those calls NOW - before their competitors do! 💪</strong></p>
+    </div>
+
+    <hr style="margin: 30px 0; border: none; border-top: 1px solid #e5e7eb;">
+    <p style="text-align: center; color: #6b7280; font-size: 12px;">
+      Lead Analysis Generated: February 21, 2026<br>
+      Questions? Reply to this email or contact your jarvisbot agent.
     </p>
-
-    <!-- TOP PICK -->
-    <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 8px; padding: 20px; margin: 25px 0; color: white;">
-      <h2 style="margin: 0 0 10px 0; font-size: 24px;">🥇 #1 PRIORITY: Joe the Plumber</h2>
-      <div style="font-size: 32px; font-weight: bold; margin: 10px 0;">9/10</div>
-      <p style="margin: 5px 0; font-size: 18px;"><strong>📞 +1 860-614-7157</strong></p>
-      <p style="margin: 15px 0 5px 0; font-size: 14px; opacity: 0.9;">⭐ 4.6 stars | 536 reviews</p>
-      
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px;">Why They Need You:</p>
-        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-          <li><strong>536 reviews = MASSIVE business</strong> - likely $500K-$1M+ annually</li>
-          <li>No website = losing 24/7 emergency plumbing calls (worth thousands/month)</li>
-          <li>Missing "plumber near me" searches when customers need help at 2 AM</li>
-          <li>Strong name recognition perfect for brand-building site</li>
-        </ul>
-      </div>
-
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px;">📞 CALL TODAY: 7:30-8:30 AM</p>
-        <p style="margin: 5px 0; font-size: 14px;"><em>"536 reviews with no website? You're losing thousands in emergency calls every month."</em></p>
-      </div>
-
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0; font-weight: bold; font-size: 14px;">🎯 KEY TALKING POINTS:</p>
-        <p style="margin: 5px 0 0 0; font-size: 14px;">• Emergency calls happen at 2 AM - you're invisible in those searches<br>
-        • 536 reviews hidden on Google Maps - showcase them on your own site 24/7<br>
-        • My plumbing clients see 15-30 new leads/month within 60 days</p>
-      </div>
-    </div>
-
-    <!-- SECOND PICK -->
-    <div style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border-radius: 8px; padding: 20px; margin: 25px 0; color: white;">
-      <h2 style="margin: 0 0 10px 0; font-size: 22px;">🥈 #2 PRIORITY: Anytime Sewer & Drain Services</h2>
-      <div style="font-size: 28px; font-weight: bold; margin: 10px 0;">8.5/10</div>
-      <p style="margin: 5px 0; font-size: 18px;"><strong>📞 +1 860-286-0331</strong></p>
-      <p style="margin: 15px 0 5px 0; font-size: 14px; opacity: 0.9;">⭐ 4.8 stars | 92 reviews (HIGHEST RATING!)</p>
-      
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px;">Why They Need You:</p>
-        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-          <li><strong>"Anytime" branding = 24/7 service</strong> but customers can't reach them online anytime!</li>
-          <li>4.8 stars (best rating of all 3) deserves professional online presence</li>
-          <li>Sewer emergencies = panic searches at midnight</li>
-          <li>92 reviews = established, profitable, can afford investment</li>
-        </ul>
-      </div>
-
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px;">📞 CALL TODAY: 8:30 AM or 3-4 PM</p>
-        <p style="margin: 5px 0; font-size: 14px;"><em>"Your name says 'Anytime' but customers can't find you online anytime. Let's fix that."</em></p>
-      </div>
-
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0; font-weight: bold; font-size: 14px;">🎯 KEY TALKING POINTS:</p>
-        <p style="margin: 5px 0 0 0; font-size: 14px;">• Sewer backups happen at midnight - capture those panic searches<br>
-        • Emergency request form = leads while you sleep<br>
-        • 4.8 stars should be front-and-center on your own site</p>
-      </div>
-    </div>
-
-    <!-- THIRD PICK -->
-    <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border-radius: 8px; padding: 20px; margin: 25px 0; color: white;">
-      <h2 style="margin: 0 0 10px 0; font-size: 22px;">🥉 #3 PRIORITY: John's Plumbing & Heating LLC</h2>
-      <div style="font-size: 28px; font-weight: bold; margin: 10px 0;">7/10</div>
-      <p style="margin: 5px 0; font-size: 18px;"><strong>📞 +1 860-242-4909</strong></p>
-      <p style="margin: 15px 0 5px 0; font-size: 14px; opacity: 0.9;">⭐ 4.3 stars | 41 reviews</p>
-      
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px;">Why They Need You:</p>
-        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-          <li><strong>Dual services (plumbing + heating)</strong> = cross-sell opportunity</li>
-          <li>Heating = seasonal promotion opportunities (furnace tune-ups, AC repairs)</li>
-          <li>Growing business (41 reviews) ready to scale</li>
-          <li>LLC = professional operation, easier decision-making</li>
-        </ul>
-      </div>
-
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0 0 10px 0; font-weight: bold; font-size: 16px;">📞 CALL TODAY: 5-6 PM</p>
-        <p style="margin: 5px 0; font-size: 14px;"><em>"You're offering TWO valuable services but only people who call you know that."</em></p>
-      </div>
-
-      <div style="background-color: rgba(255,255,255,0.2); border-radius: 6px; padding: 15px; margin-top: 15px;">
-        <p style="margin: 0; font-weight: bold; font-size: 14px;">🎯 KEY TALKING POINTS:</p>
-        <p style="margin: 5px 0 0 0; font-size: 14px;">• Plumbing customers don't know you do heating - website cross-promotes<br>
-        • Capture seasonal searches (furnace tune-ups in fall, AC in summer)<br>
-        • Contractors with websites get 20-30% more calls</p>
-      </div>
-    </div>
-
-    <!-- CALL STRATEGY -->
-    <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 25px 0; border-radius: 4px;">
-      <h3 style="color: #92400e; margin: 0 0 15px 0;">☎️ TODAY'S CALL STRATEGY</h3>
-      <table style="width: 100%; border-collapse: collapse;">
-        <tr style="background-color: #fef9e7;">
-          <td style="padding: 10px; border: 1px solid #fbbf24;"><strong>7:30-8:30 AM</strong></td>
-          <td style="padding: 10px; border: 1px solid #fbbf24;">Call Joe the Plumber (before first job)</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #fbbf24;"><strong>8:30-9:00 AM</strong></td>
-          <td style="padding: 10px; border: 1px solid #fbbf24;">Call Anytime Sewer & Drain</td>
-        </tr>
-        <tr style="background-color: #fef9e7;">
-          <td style="padding: 10px; border: 1px solid #fbbf24;"><strong>3:00-4:00 PM</strong></td>
-          <td style="padding: 10px; border: 1px solid #fbbf24;">Second attempt: Anytime Sewer & Drain</td>
-        </tr>
-        <tr>
-          <td style="padding: 10px; border: 1px solid #fbbf24;"><strong>5:00-6:00 PM</strong></td>
-          <td style="padding: 10px; border: 1px solid #fbbf24;">Call John's Plumbing & Heating (end of day)</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- PHONE SCRIPTS -->
-    <div style="margin-top: 30px; padding: 20px; background-color: #f3f4f6; border-radius: 8px;">
-      <h3 style="color: #1f2937; margin: 0 0 15px 0;">📝 PHONE SCRIPT TEMPLATE (All Leads)</h3>
-      
-      <div style="background-color: white; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
-        <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;"><strong>Opening (customize per lead):</strong></p>
-        <p style="margin: 0; font-style: italic; color: #374151;">"Hi, is this [OWNER NAME]? My name is [YOUR NAME] and I specialize in building websites for [plumbing/contractor] businesses here in Connecticut. I came across your business and was impressed by your [reviews/rating/service offering]."</p>
-      </div>
-
-      <div style="background-color: white; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
-        <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;"><strong>Pain Point (customize per lead):</strong></p>
-        <p style="margin: 0; font-style: italic; color: #374151;">"I'm calling because I noticed you don't have a website, and with [their specific situation], you're likely missing [specific lost opportunities]."</p>
-      </div>
-
-      <div style="background-color: white; padding: 15px; border-radius: 6px; margin-bottom: 15px;">
-        <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;"><strong>Value Proposition:</strong></p>
-        <p style="margin: 0; font-style: italic; color: #374151;">"Most of my plumbing clients see 15-30 new leads per month within 60 days of launch. For emergency services, that's $3,000-$10,000 in monthly revenue they weren't getting before."</p>
-      </div>
-
-      <div style="background-color: white; padding: 15px; border-radius: 6px;">
-        <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;"><strong>Close (soft ask):</strong></p>
-        <p style="margin: 0; font-style: italic; color: #374151;">"Could we schedule 15 minutes this week for me to show you exactly what I'm talking about? I promise it'll be worth your time."</p>
-      </div>
-    </div>
-
-    <!-- OBJECTION HANDLING -->
-    <div style="margin-top: 25px; padding: 20px; background-color: #fee2e2; border-radius: 8px; border-left: 4px solid #ef4444;">
-      <h3 style="color: #991b1b; margin: 0 0 15px 0;">🛡️ OBJECTION HANDLING CHEAT SHEET</h3>
-      
-      <p style="margin: 10px 0; color: #7f1d1d;">
-        <strong>"I'm too busy"</strong><br>
-        <span style="color: #374151;">"That's exactly WHY you need this - your website captures leads 24/7 while you're on jobs. It works so you don't have to."</span>
-      </p>
-
-      <p style="margin: 10px 0; color: #7f1d1d;">
-        <strong>"How much does it cost?"</strong><br>
-        <span style="color: #374151;">"Let's start with what you're losing first - then we can talk investment. Most plumbing sites I build are $2,500-$5,000 and pay for themselves in the first month."</span>
-      </p>
-
-      <p style="margin: 10px 0; color: #7f1d1d;">
-        <strong>"I get plenty of business from word-of-mouth"</strong><br>
-        <span style="color: #374151;">"That's great! But 70% of people search online first now. Your happy customers are recommending you - let's make it easy for those referrals to find you instantly."</span>
-      </p>
-
-      <p style="margin: 10px 0; color: #7f1d1d;">
-        <strong>"I'll think about it"</strong><br>
-        <span style="color: #374151;">"Totally understand. Can I send you some quick examples of what I'm talking about? What's your email? I'll follow up next week."</span>
-      </p>
-    </div>
-
-    <!-- SUMMARY -->
-    <div style="margin-top: 30px; padding: 20px; background-color: #dbeafe; border-radius: 8px;">
-      <h3 style="color: #1e40af; margin: 0 0 15px 0;">📊 SUMMARY & ACTION ITEMS</h3>
-      <p style="color: #1e3a8a; line-height: 1.8; margin: 0;">
-        ✅ <strong>3 high-quality leads</strong> - all with NO websites (clear value prop)<br>
-        ✅ <strong>All established businesses</strong> - have cash flow to invest<br>
-        ✅ <strong>Emergency/immediate service</strong> = high-value customers<br>
-        ✅ <strong>Strong ROI angle</strong> - losing thousands in leads monthly<br><br>
-        
-        <strong style="color: #1e40af;">GOAL FOR TODAY:</strong> Book at least ONE discovery call<br>
-        <strong style="color: #1e40af;">FOCUS:</strong> ROI, emergency lead capture, easy "yes" to conversation
-      </p>
-    </div>
-
-    <!-- EMAIL TEMPLATES -->
-    <div style="margin-top: 30px; padding: 20px; background-color: #f3f4f6; border-radius: 8px;">
-      <h3 style="color: #1f2937; margin: 0 0 15px 0;">📧 BACKUP EMAIL TEMPLATE (If No Answer)</h3>
-      
-      <div style="background-color: white; padding: 20px; border-radius: 6px; border: 2px solid #e5e7eb;">
-        <p style="margin: 0; font-weight: bold; color: #6b7280; font-size: 14px;">SUBJECT:</p>
-        <p style="margin: 5px 0 15px 0; color: #374151;">Quick question about capturing [after-hours/emergency] calls</p>
-        
-        <p style="margin: 0; font-weight: bold; color: #6b7280; font-size: 14px;">BODY:</p>
-        <p style="margin: 5px 0; color: #374151; line-height: 1.8;">
-          Hi [OWNER NAME],<br><br>
-          
-          I noticed your business has [impressive stat - reviews/rating] - congratulations on building such a [successful/strong reputation] operation!<br><br>
-          
-          I specialize in building websites for [plumbing/emergency service] businesses, and I noticed you don't currently have one.<br><br>
-          
-          Here's why this matters: [Specific pain point - missing emergency calls/seasonal opportunities/cross-sell potential].<br><br>
-          
-          Would you be open to a quick 15-minute call this week? I can show you exactly what I mean and share examples from other Connecticut [plumbers/contractors].<br><br>
-          
-          Best regards,<br>
-          [YOUR NAME]<br>
-          [YOUR PHONE]
-        </p>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
-    <div style="margin-top: 30px; padding: 20px; text-align: center; border-top: 2px solid #e5e7eb;">
-      <p style="color: #6b7280; font-size: 14px; margin: 0;">
-        <strong>Full analysis available in LEAD_ANALYSIS.md</strong><br>
-        Generated: February 21, 2026 | Search Area: 30mi from 06002
-      </p>
-      <p style="color: #10b981; font-size: 18px; font-weight: bold; margin: 15px 0 0 0;">
-        🚀 Go close those deals!
-      </p>
-    </div>
-
   </div>
-
 </body>
 </html>
