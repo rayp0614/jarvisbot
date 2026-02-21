@@ -30,6 +30,7 @@ function getTransporter() {
     greetingTimeout: 30000,
     socketTimeout: 60000, // 60 seconds for large emails
     pool: false, // Disable pooling for serverless environments
+    family: 4, // Force IPv4 (Railway has IPv6 connectivity issues with Gmail)
   });
 }
 
