@@ -3,7 +3,7 @@
  * Integrates with Trigger.dev to find local business leads
  */
 
-const TRIGGER_API_URL = 'https://api.trigger.dev/v3';
+const TRIGGER_API_URL = 'https://api.trigger.dev/api/v1';
 const TRIGGER_PROJECT_ID = process.env.TRIGGER_PROJECT_ID || 'proj_zfbbwxmqkdqzbowvsdoc';
 
 /**
@@ -41,7 +41,7 @@ async function triggerLeadSearch(params) {
     payload.recipientEmail = params.recipientEmail;
   }
 
-  const response = await fetch(`${TRIGGER_API_URL}/runs/find-leads/trigger`, {
+  const response = await fetch(`${TRIGGER_API_URL}/tasks/find-leads/trigger`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${secretKey}`,
