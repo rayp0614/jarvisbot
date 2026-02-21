@@ -50,7 +50,7 @@ async function sendToJarvisBot(
    - Category: ${l.business.category}
    - Phone: ${l.business.phone || "N/A"}
    - Address: ${l.business.address || "N/A"}
-   - Website: ${l.business.website || "NO WEBSITE"}
+   - Website URL: ${l.business.website || "NO WEBSITE"} (INCLUDE THIS LINK IN YOUR EMAIL!)
    - Rating: ${l.business.rating ? `${l.business.rating} stars (${l.business.reviewCount} reviews)` : "N/A"}
    - Initial Score: ${l.leadScore}/100
    - Why: ${l.reason}`
@@ -125,11 +125,28 @@ SUBJECT: 🎯 Lead Analysis: ${leads.length} Prospects - ${new Date().toLocaleDa
 FORMAT: html
 
 <html>
-<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-  <h1 style="color: #2563eb;">🎯 Top Leads for Today</h1>
+<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f8fafc;">
+  <h1 style="color: #1e293b;">🎯 Top Leads for Today</h1>
 
-  <!-- Your beautifully formatted HTML analysis goes here -->
-  <!-- Include: Top 3 picks, full priority ranking, phone scripts, email templates -->
+  <!-- IMPORTANT STYLING REQUIREMENTS:
+    - Use professional, muted colors (slate, gray, subtle blue accents)
+    - NO bright/neon colors (no hot pink, bright purple, lime green, etc.)
+    - Card backgrounds: white (#ffffff) or very light gray (#f8fafc)
+    - Text: dark gray (#1e293b for headers, #475569 for body)
+    - Accent color: subtle blue (#3b82f6) for links and highlights only
+    - Border colors: light gray (#e2e8f0)
+  -->
+
+  <!-- FOR EACH LEAD, ALWAYS INCLUDE:
+    - Business name as header
+    - Phone number (clickable: tel:+1XXXXXXXXXX)
+    - Website URL (clickable link) - REQUIRED, don't skip this!
+    - Rating and review count
+    - Your conversion score
+    - Why they'll convert (bullet points)
+    - Opening line/script
+    - Best time to contact
+  -->
 
 </body>
 </html>
