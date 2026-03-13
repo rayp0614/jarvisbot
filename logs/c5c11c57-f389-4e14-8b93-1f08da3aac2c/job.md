@@ -1,0 +1,1 @@
+Read the EMAIL_TO_SEND.md file from the completed job logs at logs/238d6c65-5b67-46f5-a7a1-9803f03cdcf2/EMAIL_TO_SEND.md and send that email content using the send_email tool. Use the subject line and body content exactly as specified in that file.
